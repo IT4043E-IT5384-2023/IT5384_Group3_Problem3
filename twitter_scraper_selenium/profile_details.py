@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-from typing import Union
-from .scraping_utilities import Scraping_utilities
-import os
-import logging
 import json
-from .profile_api import Profile_api
+import logging
+import os
+from typing import Union
+
+from .scraping_utilities import Scraping_utilities
 
 logger = logging.getLogger(__name__)
 format = logging.Formatter(
@@ -75,3 +75,43 @@ def get_profile_details(twitter_username: str, proxy: Union[str, None] = None,
                 'Data Successfully Saved to {}'.format(json_file_location))
     else:
       return json.dumps(data)
+
+def get_profiles_detailslist(twitter_usernames: list, proxy: Union[str, None] = None,
+                         filename: str = "", directory: str = os.getcwd()):
+    all_data = {}
+
+    for twitter_username in twitter_usernames:
+        print("Đang scrape account " + twitter_username)
+        profile_bot = Profile_detail(username=twitter_username, proxy=proxy)
+        data = profile_bot.scrape()
+
+        if len(data) > 0:
+            # Save data for each user in the dictionary
+            all_data[twitter_username] = data
+
+    if filename == '':
+        # if filename was not provided then print the JSON to console
+        return json.dumps(all_data)
+    elif filename != '' and len(all_data) > 0:
+        # if filename was provided, save it to that file
+        mode = 'w'
+        json_file_location = os.path.join(directory, filename + ".json")
+        if os.path.exists(json_file_location):
+            mode = 'r'
+        with open(json_file_location, mode, encoding='utf-8') as file:
+            if mode == 'r':
+                try:
+                    file_content = file.read()
+                    content = json.loads(file_content)
+                except json.decoder.JSONDecodeError:
+                    logger.warning('Invalid JSON Detected!')
+                    content = {}
+                file.close()
+                content.update(all_data)
+        with open(json_file_location, 'w', encoding='utf-8') as file_in_write_mode:
+            json.dump(content, file_in_write_mode)
+            logger.setLevel(logging.INFO)
+            logger.info(
+                'Data Successfully Saved to {}'.format(json_file_location))
+    else:
+        return json.dumps(all_data)
