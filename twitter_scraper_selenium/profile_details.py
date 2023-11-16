@@ -150,22 +150,16 @@ def get_profiles_detailslist(twitter_usernames: list, proxy: Union[str, None] = 
         profile_bot = Profile_detail(username=twitter_username, proxy=proxy)
         data = profile_bot.scrape()
 
-        try:
-            _ = len(data)
-        except:
-            time.sleep(600)
-            profile_bot = Profile_detail(username=twitter_username, proxy=proxy)
-            data = profile_bot.scrape()
 
         if len(data):
             # Save data for each user in the dictionary
             all_data[twitter_username] = data
             record_count += 1  # Tăng biến đếm sau mỗi bản ghi thêm vào
 
-            # Ghi vào file sau mỗi 5 bản ghi
+            # Ghi vào file sau mỗi 10 bản ghi
             if record_count % 10 == 0:
                 save_records_to_file(filename, directory, all_data)
-                all_data = {}  # Đặt lại all_data để chuẩn bị cho 5 bản ghi tiếp theo
+                all_data = {}  # Đặt lại all_data để chuẩn bị cho 10 bản ghi tiếp theo
 
     # Ghi file cho những bản ghi còn lại (nếu có)
     if all_data:
@@ -181,7 +175,7 @@ def save_records_to_file(filename, directory, all_data):
     with open(json_file_location, "a", encoding="utf-8") as writer:
         for major_attr, sub_dict in all_data.items():
             new_dict = {major_attr: sub_dict}
-            writer.write(json.dumps(new_dict) + "\n")
+            writer.write(json.dumps(new_dict, indent=4) + "\n")
     logger.setLevel(logging.INFO)
     logger.info('Data Successfully Saved to {}'.format(json_file_location))
 
