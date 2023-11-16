@@ -12,7 +12,19 @@ def get_records_by_field(csv_file, field_name):
                 records.append(row[field_name])
 
     return records
-twitter_username = get_records_by_field('data.csv','screenName')
-filename = "twitter_api_data"
+twitter_username = get_records_by_field('Username.csv','screenName')
+# filename = 'Username.csv'
+# twitter_username = {}
+# with open(filename, 'r') as file:
+#     file.seek(0)  # Di chuyển con trỏ về đầu file
+#     reader = csv.reader(file)
+#     # Lặp qua từng dòng
+#     for row in reader:
+#         # Lấy nội dung của dòng
+#         twitter_username = row
 
-get_profiles_detailslist(twitter_usernames=twitter_username, filename=filename)
+
+output_file = "twitter_api_data"
+
+
+get_profiles_detailslist(twitter_usernames=twitter_username, filename=output_file)
