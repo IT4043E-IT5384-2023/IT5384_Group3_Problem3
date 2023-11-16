@@ -1,5 +1,6 @@
 from twitter_scraper_selenium.profile_details import get_profiles_detailslist
 import csv
+import time
 
 def get_records_by_field(csv_file, field_name):
     records = []
@@ -12,6 +13,8 @@ def get_records_by_field(csv_file, field_name):
                 records.append(row[field_name])
 
     return records
+
+
 twitter_username = get_records_by_field('Username.csv','screenName')
 # filename = 'Username.csv'
 # twitter_username = {}

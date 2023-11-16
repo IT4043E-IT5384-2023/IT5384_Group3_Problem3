@@ -3,6 +3,7 @@
 import json
 import logging
 import os
+import time
 from typing import Union
 
 from .scraping_utilities import Scraping_utilities
@@ -116,15 +117,47 @@ def get_profiles_detailslist(twitter_usernames: list, proxy: Union[str, None] = 
     # else:
     #     return json.dumps(all_data)
 
+    # all_data = {}
+    # record_count = 0  # Biến đếm số lượng bản ghi đã thêm vào all_data
+    #
+    # for twitter_username in twitter_usernames:
+    #     print("Đang scrape account " + twitter_username)
+    #     profile_bot = Profile_detail(username=twitter_username, proxy=proxy)
+    #     data = profile_bot.scrape()
+    #
+    #     if len(data) > 0:
+    #         # Save data for each user in the dictionary
+    #         all_data[twitter_username] = data
+    #         record_count += 1  # Tăng biến đếm sau mỗi bản ghi thêm vào
+    #
+    #         # Ghi vào file sau mỗi 5 bản ghi
+    #         if record_count % 10 == 0:
+    #             save_records_to_file(filename, directory, all_data)
+    #             all_data = {}  # Đặt lại all_data để chuẩn bị cho 5 bản ghi tiếp theo
+    #
+    # # Ghi file cho những bản ghi còn lại (nếu có)
+    # if all_data:
+    #     save_records_to_file(filename, directory, all_data)
+    #
+    # return json.dumps(all_data)
+
     all_data = {}
     record_count = 0  # Biến đếm số lượng bản ghi đã thêm vào all_data
 
     for twitter_username in twitter_usernames:
         print("Đang scrape account " + twitter_username)
+
         profile_bot = Profile_detail(username=twitter_username, proxy=proxy)
         data = profile_bot.scrape()
 
-        if len(data) > 0:
+        try:
+            _ = len(data)
+        except:
+            time.sleep(600)
+            profile_bot = Profile_detail(username=twitter_username, proxy=proxy)
+            data = profile_bot.scrape()
+
+        if len(data):
             # Save data for each user in the dictionary
             all_data[twitter_username] = data
             record_count += 1  # Tăng biến đếm sau mỗi bản ghi thêm vào
@@ -138,29 +171,41 @@ def get_profiles_detailslist(twitter_usernames: list, proxy: Union[str, None] = 
     if all_data:
         save_records_to_file(filename, directory, all_data)
 
-    return json.dumps(all_data)
-
-
 def save_records_to_file(filename, directory, all_data):
     if filename == '':
         return  # Nếu không có tên file, không làm gì cả
 
-    json_file_location = os.path.join(directory, filename + ".json")
+    json_file_location = os.path.join(directory, filename + ".jsonl")
 
-    if os.path.exists(json_file_location):
-        with open(json_file_location, 'r', encoding='utf-8') as file:
-            try:
-                file_content = file.read()
-                content = json.loads(file_content)
-            except json.decoder.JSONDecodeError:
-                logger.warning('Invalid JSON Detected!')
-                content = {}
-    else:
-        content = {}
+    # Open the file in write mode
+    with open(json_file_location, "a", encoding="utf-8") as writer:
+        for major_attr, sub_dict in all_data.items():
+            new_dict = {major_attr: sub_dict}
+            writer.write(json.dumps(new_dict) + "\n")
+    logger.setLevel(logging.INFO)
+    logger.info('Data Successfully Saved to {}'.format(json_file_location))
 
-    # Ghi vào file sau mỗi 5 bản ghi
-    content.update(all_data)
-    with open(json_file_location, 'w', encoding='utf-8') as file_in_write_mode:
-        json.dump(content, file_in_write_mode)
-        logger.setLevel(logging.INFO)
-        logger.info('Data Successfully Saved to {}'.format(json_file_location))
+
+# def save_records_to_file(filename, directory, all_data):
+#     if filename == '':
+#         return  # Nếu không có tên file, không làm gì cả
+#
+#     json_file_location = os.path.join(directory, filename + ".json")
+#
+#     if os.path.exists(json_file_location):
+#         with open(json_file_location, 'r', encoding='utf-8') as file:
+#             try:
+#                 file_content = file.read()
+#                 content = json.loads(file_content)
+#             except json.decoder.JSONDecodeError:
+#                 logger.warning('Invalid JSON Detected!')
+#                 content = {}
+#     else:
+#         content = {}
+#
+#     # Ghi vào file sau mỗi 5 bản ghi
+#     content.update(all_data)
+#     with open(json_file_location, 'w', encoding='utf-8') as file_in_write_mode:
+#         json.dump(content, file_in_write_mode)
+#         logger.setLevel(logging.INFO)
+#         logger.info('Data Successfully Saved to {}'.format(json_file_location))
