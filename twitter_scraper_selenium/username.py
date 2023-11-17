@@ -4,7 +4,7 @@ import csv
 def get_records_by_field(csv_file, field_name):
     records = []
 
-    with open(csv_file, 'r', newline='') as file:
+    with open(csv_file, 'r', newline='', errors="ignore") as file:
         csv_reader = csv.DictReader(file)
 
         for row in csv_reader:
@@ -15,7 +15,7 @@ def get_records_by_field(csv_file, field_name):
 
 
 def write_records_to_csv(records, output_file):
-    with open(output_file, 'w', newline='') as file:
+    with open(output_file, 'a', newline='') as file:
         csv_writer = csv.writer(file)
         # csv_writer.writerow([field_name])  # Write header
 
@@ -25,8 +25,8 @@ def write_records_to_csv(records, output_file):
 
 
 # Example usage:
-csv_file_path = 'data.csv'
-desired_field = 'screenName'
+csv_file_path = 'gender-classifier-DFE-791531.csv'
+desired_field = 'name'
 output_csv_file = 'Username.csv'
 
 result = get_records_by_field(csv_file_path, desired_field)
