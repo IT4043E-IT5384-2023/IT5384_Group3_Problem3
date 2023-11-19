@@ -169,13 +169,11 @@ def save_records_to_file(filename, directory, all_data):
     if filename == '':
         return  # Nếu không có tên file, không làm gì cả
 
-    json_file_location = os.path.join(directory, filename + ".jsonl")
+    json_file_location = os.path.join(directory, filename + ".json")
 
     # Open the file in write mode
     with open(json_file_location, "a", encoding="utf-8") as writer:
-        for major_attr, sub_dict in all_data.items():
-            new_dict = {major_attr: sub_dict}
-            writer.write(json.dumps(new_dict, indent=4) + "\n")
+        writer.write(json.dumps(all_data))
     logger.setLevel(logging.INFO)
     logger.info('Data Successfully Saved to {}'.format(json_file_location))
 

@@ -31,3 +31,7 @@ output_file = "twitter_api_data"
 
 
 get_profiles_detailslist(twitter_usernames=twitter_username, filename=output_file)
+
+# from twitter_scraper_selenium import scrape_profile_with_api
+#
+# scrape_profile_with_api('elonmusk', output_filename='quynh', tweets_count= 1)
