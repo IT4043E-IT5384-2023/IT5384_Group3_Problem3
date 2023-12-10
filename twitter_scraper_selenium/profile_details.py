@@ -178,26 +178,3 @@ def save_records_to_file(filename, directory, all_data):
     logger.info('Data Successfully Saved to {}'.format(json_file_location))
 
 
-# def save_records_to_file(filename, directory, all_data):
-#     if filename == '':
-#         return  # Nếu không có tên file, không làm gì cả
-#
-#     json_file_location = os.path.join(directory, filename + ".json")
-#
-#     if os.path.exists(json_file_location):
-#         with open(json_file_location, 'r', encoding='utf-8') as file:
-#             try:
-#                 file_content = file.read()
-#                 content = json.loads(file_content)
-#             except json.decoder.JSONDecodeError:
-#                 logger.warning('Invalid JSON Detected!')
-#                 content = {}
-#     else:
-#         content = {}
-#
-#     # Ghi vào file sau mỗi 5 bản ghi
-#     content.update(all_data)
-#     with open(json_file_location, 'w', encoding='utf-8') as file_in_write_mode:
-#         json.dump(content, file_in_write_mode)
-#         logger.setLevel(logging.INFO)
-#         logger.info('Data Successfully Saved to {}'.format(json_file_location))
