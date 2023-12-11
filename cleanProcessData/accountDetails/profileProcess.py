@@ -30,6 +30,7 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
         'verified',
         'profile_image_url_https',
         'profile_banner_url',
+        'score',
         'label'
     ]
 
@@ -60,6 +61,7 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
             'verified': legacy_data.get('verified', False),
             'profile_image_url_https': legacy_data.get('profile_image_url_https', ''),
             'profile_banner_url': legacy_data.get('profile_banner_url', ''),
+            'score': -1,
             'label': ''
         }
 
