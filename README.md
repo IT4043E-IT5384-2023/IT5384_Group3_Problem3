@@ -630,3 +630,11 @@ This scraper only scrapes public data available to unauthenticated user and does
 
 MIT
 </div>
+
+## Kibana Dashboard
+
+**General Dashboard**
+![General Dashboard](images/general.jpeg)
+
+**Account Dashboard**
+![Account Dashboard](images/user.jpeg)
