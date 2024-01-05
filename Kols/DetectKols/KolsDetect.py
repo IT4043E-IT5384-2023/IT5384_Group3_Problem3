@@ -22,7 +22,7 @@ def DetectLabel(account_data):
     label = ""
     if totalScore_acc >= 65:
         label = "High quality"
-    elif 35 < totalScore_acc <= 64:
+    elif 40 < totalScore_acc <= 64:
         label = "Medium quality"
     else:
         label = "Low quality"
