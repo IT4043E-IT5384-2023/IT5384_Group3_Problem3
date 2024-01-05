@@ -634,7 +634,7 @@ MIT
 ## Kibana Dashboard
 
 **General Dashboard**
-![General Dashboard](images/general.jpeg)
+![General Dashboard](images/General.png)
 
 **Account Dashboard**
-![Account Dashboard](images/user.jpeg)
+![Account Dashboard](images/User.png)
