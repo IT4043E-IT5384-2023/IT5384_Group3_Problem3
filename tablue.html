@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Tableau Dashboards</title>
+  <style>
+
+    .tableauPlaceholder {
+      position: relative;
+      padding-left: 200px;
+    }
+
+    #viz1704387991125 {
+      margin-top: 200px; /* Adjust the top margin for the second dashboard */
+    }
+
+  </style>
+</head>
+
+
+<body style="background-color: #FFFFFF;">
+
+    <div class='tableauPlaceholder' id='viz1704388028026' style='position: relative; margin-top: 20px;'>
+
+        <object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
+          <param name='name' value='XDashBoard&#47;Dashboard2' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+          <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;XD&#47;XDashBoard&#47;Dashboard2&#47;1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' />
+          <param name='language' value='fr-FR' />
+          <param name='filter' value='publish=yes' />
+        </object>
+      </div>
+
+
+<div class='tableauPlaceholder' id='viz1704387991125' style='position: relative margin-top: 50px;'>
+  <noscript>
+   <a href='#'>
+      <img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;XU&#47;XUserDashBoard&#47;Dashboard1&#47;1_rss.png' style='border: none' />
+    </a>
+  </noscript>
+  <object class='tableauViz' style='display:none;'>
+    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+    <param name='embed_code_version' value='3' />
+    <param name='site_root' value='' />
+    <param name='name' value='XUserDashBoard&#47;Dashboard1' />
+    <param name='tabs' value='no' />
+    <param name='toolbar' value='yes' />
+    <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;XU&#47;XUserDashBoard&#47;Dashboard1&#47;1.png' />
+    <param name='animate_transition' value='yes' />
+    <param name='display_static_image' value='yes' />
+    <param name='display_spinner' value='yes' />
+    <param name='display_overlay' value='yes' />
+    <param name='display_count' value='yes' />
+    <param name='language' value='fr-FR' />
+    <param name='filter' value='publish=yes' />
+  </object>
+</div>
+
+
+<script type='text/javascript'>
+  function adjustTableauVizSize() {
+    var viz1Element = document.getElementById('viz1704387991125');
+    var viz1 = viz1Element.getElementsByTagName('object')[0];
+    if (viz1Element.offsetWidth > 800) {
+      viz1.style.width = '1366px';
+      viz1.style.height = '795px';
+    } else if (viz1Element.offsetWidth > 500) {
+      viz1.style.width = '1366px';
+      viz1.style.height = '795px';
+    } else {
+      viz1.style.width = '100%';
+      viz1.style.height = '3377px';
+    }
+
+    var viz2Element = document.getElementById('viz1704388028026');
+    var viz2 = viz2Element.getElementsByTagName('object')[0];
+    if (viz2Element.offsetWidth > 800) {
+      viz2.style.width = '1366px';
+      viz2.style.height = '795px';
+    } else if (viz2Element.offsetWidth > 500) {
+      viz2.style.width = '1366px';
+      viz2.style.height = '795px';
+    } else {
+      viz2.style.width = '100%';
+      viz2.style.height = '2077px';
+    }
+  }
+
+  adjustTableauVizSize(); // Call the function on page load
+
+  // Call the function whenever the window is resized
+  window.addEventListener('resize', adjustTableauVizSize);
+
+  var scriptElement = document.createElement('script');
+  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+  document.body.appendChild(scriptElement);
+</script>
+
+</body>
+</html>
