@@ -631,7 +631,7 @@ This scraper only scrapes public data available to unauthenticated user and does
 MIT
 </div>
 
-## Kibana Dashboard
+## Tablue Dashboard
 
 **General Dashboard**
 ![General Dashboard](images/General.PNG)
